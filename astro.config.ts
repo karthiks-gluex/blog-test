@@ -30,6 +30,7 @@ export default defineConfig({
   // output: "static",
   site: "https://karthiks-gluex.github.io/blog-test/",
   base: "/blog-test/",
+  trailingSlash: "never",
 
   integrations: [
     sitemap(),
@@ -78,6 +79,10 @@ export default defineConfig({
 
   image: {
     domains: ["cdn.pixabay.com"],
+  },
+
+  build: {
+    assetsPrefix: "./",
   },
 
   markdown: {
