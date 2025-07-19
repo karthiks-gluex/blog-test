@@ -1,0 +1,26 @@
+---
+import Navbar from "../layout/Navbar.astro"
+
+const { showVideo = true } = Astro.props
+---
+
+<header class="bg-black">
+  <Navbar />
+
+  <!-- Hero -->
+  {
+    showVideo ? (
+      <div class="flex items-center justify-center">
+        <video
+          src={"/video/hero.webm"}
+          playsinline
+          autoplay
+          muted
+          loop
+          class="w-full max-w-6xl"
+          poster="/"
+        />
+      </div>
+    ) : null
+  }
+</header>

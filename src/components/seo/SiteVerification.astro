@@ -1,0 +1,14 @@
+---
+import { SITE } from "astrowind:config"
+
+const googleSiteVerificationId = SITE.googleSiteVerificationId ? SITE.googleSiteVerificationId : null
+---
+
+{
+  googleSiteVerificationId && (
+    <meta
+      name="google-site-verification"
+      content={googleSiteVerificationId}
+    />
+  )
+}

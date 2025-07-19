@@ -1,0 +1,160 @@
+---
+import { formatDateShort } from "~/utils/date"
+import type { BlogPost } from "~/types/blog"
+
+interface Props {
+  post: BlogPost
+}
+
+const { post } = Astro.props
+const { data } = post
+const postImage = data.coverImage || data.image
+// const postAuthor = data.author || "GlueX Team"
+const postExcerpt = data.excerpt || data.description
+const readingTime = data.readingTime || 5
+---
+
+<article class="overflow-hidden group cursor-pointer">
+  <a
+    href={`/${post.slug}`}
+    class="block w-full h-full transition-all duration-300 ease-out hover:transform hover:scale-[1.005] hover:shadow-lg hover:shadow-black/20"
+  >
+    <div class="aspect-w-16 aspect-h-8 relative overflow-hidden rounded-lg">
+      {
+        postImage ? (
+          <img
+            src={postImage}
+            alt={data.title}
+            class="w-full h-48 sm:h-52 md:h-56 object-cover transition-transform rounded-lg duration-500 ease-out group-hover:scale-[1.02]"
+          />
+        ) : (
+          <div class="w-full h-48 sm:h-52 md:h-56 bg-[#222222] rounded-lg flex items-center justify-center transition-transform duration-500 ease-out group-hover:scale-105">
+            <svg
+              width="40"
+              height="40"
+              viewBox="0 0 40 40"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              class="transition-opacity duration-300 group-hover:opacity-80"
+            >
+              <>
+                <g clip-path="url(#clip0_606_9855)">
+                  <>
+                    <circle
+                      cx="20"
+                      cy="20"
+                      r="20"
+                      fill="#222222"
+                    />
+                    <path
+                      d="M27.5 22.5L24.928 19.928C24.615 19.615 24.192 19.44 23.75 19.44C23.308 19.44 22.885 19.615 22.572 19.928L15 27.5M14.167 12.5H25.833C26.754 12.5 27.5 13.246 27.5 14.167V25.833C27.5 26.754 26.754 27.5 25.833 27.5H14.167C13.246 27.5 12.5 26.754 12.5 25.833V14.167C12.5 13.246 13.246 12.5 14.167 12.5ZM19.167 17.5C19.167 18.421 18.421 19.167 17.5 19.167C16.579 19.167 15.833 18.421 15.833 17.5C15.833 16.579 16.579 15.833 17.5 15.833C18.421 15.833 19.167 16.579 19.167 17.5Z"
+                      stroke="#71717A"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      shape-rendering="crispEdges"
+                    />
+                  </>
+                </g>
+                <defs>
+                  <>
+                    <filter
+                      id="filter0_d_606_9855"
+                      x="5.75"
+                      y="6.75"
+                      width="24.5"
+                      height="24.5"
+                      filterUnits="userSpaceOnUse"
+                      color-interpolation-filters="sRGB"
+                    >
+                      <>
+                        <feFlood
+                          flood-opacity="0"
+                          result="BackgroundImageFix"
+                        />
+                        <feColorMatrix
+                          in="SourceAlpha"
+                          type="matrix"
+                          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                          result="hardAlpha"
+                        />
+                        <feOffset dy="1" />
+                        <feGaussianBlur stdDeviation="2.5" />
+                        <feComposite
+                          in2="hardAlpha"
+                          operator="out"
+                        />
+                        <feColorMatrix
+                          type="matrix"
+                          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.4 0"
+                        />
+                        <feBlend
+                          mode="normal"
+                          in2="BackgroundImageFix"
+                          result="effect1_dropShadow_606_9855"
+                        />
+                        <feBlend
+                          mode="normal"
+                          in="SourceGraphic"
+                          in2="effect1_dropShadow_606_9855"
+                          result="shape"
+                        />
+                      </>
+                    </filter>
+                    <clipPath id="clip0_606_9855">
+                      <rect
+                        width="40"
+                        height="40"
+                        rx="20"
+                        fill="white"
+                      />
+                    </clipPath>
+                  </>
+                </defs>
+              </>
+            </svg>
+          </div>
+        )
+      }
+    </div>
+
+    <div class="py-4 px-0.5">
+      {
+        data.category ? (
+          <div class="flex flex-wrap mb-1 items-center gap-1.5 text-secondary">
+            <span class="text-xs font-medium transition-colors duration-300 group-hover:text-verde">
+              {data.category.name}
+            </span>
+          </div>
+        ) : (
+          <span class="text-secondary/75 text-xs font-medium">Blog</span>
+        )
+      }
+
+      <h3
+        class="text-xl sm:text-2xl font-bold text-white mb-3 line-clamp-2 transition-colors duration-300 group-hover:text-verde"
+      >
+        {data.title}
+      </h3>
+
+      {
+        postExcerpt && (
+          <p class="text-secondary/75 mb-4 line-clamp-2 text-sm sm:text-base transition-colors duration-300 group-hover:text-secondary/90">
+            {postExcerpt}
+          </p>
+        )
+      }
+
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+          <div
+            class="flex items-center text-secondary space-x-1 text-xs transition-colors duration-300 group-hover:text-secondary/90"
+          >
+            <span>{formatDateShort(data.publishDate)}</span>
+            <span>•</span>
+            <span>{readingTime} min read</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </a>
+</article>

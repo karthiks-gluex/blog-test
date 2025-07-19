@@ -1,0 +1,4 @@
+{
+  "name": "NodeJS Alpine",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:20"
+}

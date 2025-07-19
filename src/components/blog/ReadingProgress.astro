@@ -1,0 +1,47 @@
+---
+
+---
+
+<div
+  id="reading-progress"
+  class="fixed top-0 left-0 w-full h-0.5 bg-black z-50"
+>
+  <div
+    class="h-full bg-verde transition-all rounded-r-full duration-300 ease-out"
+    style="width: 0%"
+  >
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const progressBar = document.querySelector("#reading-progress div")
+
+    function updateProgress() {
+      const article = document.querySelector("article")
+      if (!article) return
+
+      const articleTop = article.offsetTop
+      const articleHeight = article.offsetHeight
+      const windowHeight = window.innerHeight
+      const scrolled = window.scrollY
+
+      const startReading = articleTop - windowHeight / 2
+      const finishReading = articleTop + articleHeight - windowHeight
+
+      let progress = 0
+
+      if (scrolled > startReading && scrolled < finishReading) {
+        progress = (scrolled - startReading) / (finishReading - startReading)
+      } else if (scrolled >= finishReading) {
+        progress = 1
+      }
+
+      progressBar.style.width = `${Math.max(0, Math.min(1, progress)) * 100}%`
+    }
+
+    window.addEventListener("scroll", updateProgress)
+    window.addEventListener("resize", updateProgress)
+    updateProgress()
+  })
+</script>

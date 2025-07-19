@@ -1,0 +1,39 @@
+---
+const links = [
+  { href: "https://gluex.xyz", label: "Website" },
+  { href: "https://docs.gluex.xyz", label: "Documentation" },
+]
+// import SearchBar from "./SearchBar.astro"
+---
+
+<nav class="max-w-7xl mx-auto flex items-center justify-between px-4 lg:px-8 py-6">
+  <a
+    href="/"
+    class="flex items-center gap-2 group"
+  >
+    <img
+      src="/brand/logo.svg"
+      alt="GlueX logo"
+      class="w-40 transition"
+    />
+  </a>
+
+  <ul class="hidden md:flex gap-8 text-white font-medium">
+    {
+      links.map(({ href, label }) => (
+        <li>
+          <a
+            href={href}
+            target={href.startsWith("http") ? "_blank" : "_self"}
+            class="hover:text-[#02f994] transition"
+          >
+            {label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+
+  <!-- Search -->
+  <!-- <SearchBar /> -->
+</nav>

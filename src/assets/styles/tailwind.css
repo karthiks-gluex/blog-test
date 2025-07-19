@@ -1,0 +1,243 @@
+@import "tailwindcss";
+
+html,
+body {
+  background-color: black;
+}
+
+@layer base {
+}
+
+@theme {
+  --font-aux-mono: "Aux Mono", monospace;
+  --font-aeonik: "Aeonik", sans-serif;
+  --font-darker: "Darker Grotesque", sans-serif;
+
+  --color-verde: "#02F994";
+  --color-salmon: "#FC6977";
+  --color-secondary: #ececec;
+
+  --spacing-app: "1280px";
+
+  --animate-infinite-scroll: scroll var(--animation-duration, 125s) linear infinite;
+
+  @keyframes scroll {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+}
+
+@theme dark: {
+  --color-verde: #02f994;
+  --color-salmon: #fc6977;
+  --color-secondary: #ececec;
+}
+
+/* BLOG PROSE */
+.prose {
+  @apply leading-relaxed text-gray-300;
+}
+
+.prose h1 {
+  @apply text-4xl md:text-5xl font-bold tracking-tight text-white mb-8;
+}
+
+.prose h2 {
+  @apply text-3xl md:text-4xl font-bold tracking-tight text-white mb-6 mt-12 relative;
+}
+
+.prose h2::before {
+  content: "";
+  @apply absolute -left-6 top-0 w-1 h-full rounded-full bg-gray-100/25;
+}
+
+.prose h3 {
+  @apply text-2xl md:text-3xl font-semibold text-white mb-4 mt-8;
+}
+
+.prose h4 {
+  @apply text-xl md:text-2xl font-semibold text-white mb-3 mt-6;
+}
+
+.prose h5 {
+  @apply text-lg md:text-xl font-semibold text-white mb-2 mt-4;
+}
+
+.prose h6 {
+  @apply text-base md:text-lg font-semibold text-gray-200 mb-2 mt-4;
+}
+
+.prose p {
+  @apply text-lg mb-6;
+}
+
+/* lists ---------------------------------------------------------------- */
+.prose ul,
+.prose ol {
+  @apply mb-6 ml-6 space-y-2;
+}
+.prose li {
+  @apply text-lg;
+}
+.prose li::marker {
+  @apply text-gray-300;
+}
+
+.prose ul > li {
+  @apply relative pl-2;
+}
+
+.prose ul > li::before {
+  content: "";
+  @apply absolute -left-1.5 top-3 w-1.5 h-1.5 bg-gray-300/50 rounded-full;
+}
+
+/* blockquotes ---------------------------------------------------------- */
+.prose blockquote {
+  @apply relative italic text-xl text-gray-300 my-8 py-6 pl-8 pr-6 rounded-r-xl backdrop-blur-sm;
+}
+
+.prose blockquote::before {
+  content: "";
+  @apply absolute -left-1 -top-0.5 h-full w-1 -bottom-0.5 rounded-full text-6xl font-serif bg-secondary/50;
+}
+
+/* code blocks ---------------------------------------------------------- */
+.prose code {
+  @apply font-mono text-sm px-2 py-1 rounded-md border
+           text-blue-300 bg-gray-800/80 border-gray-700/50;
+}
+.prose pre {
+  @apply relative my-8 p-6 rounded-xl text-gray-100 bg-gray-900/80
+           overflow-x-auto border border-gray-700/50 backdrop-blur-sm;
+}
+.prose pre::before {
+  content: attr(data-language);
+  @apply absolute top-4 right-4 text-xs uppercase tracking-wide text-gray-500;
+}
+.prose pre code {
+  @apply p-0 bg-transparent border-none;
+}
+
+/* links ---------------------------------------------------------------- */
+.prose a {
+  @apply relative underline transition-colors duration-200 underline-offset-4;
+}
+.prose a::after {
+  content: "";
+  @apply absolute left-0 -bottom-0.5 w-0 h-0.5 transition-all duration-300
+           bg-verde;
+}
+
+.prose a:hover {
+  @apply text-verde;
+}
+
+.prose a:hover::after {
+  @apply w-full;
+}
+
+/* media ---------------------------------------------------------------- */
+.prose img {
+  @apply my-8 rounded-xl shadow-2xl border border-gray-800/50
+                            transition-transform duration-300 hover:scale-[1.02];
+}
+.prose figure {
+  @apply my-8;
+}
+.prose figcaption {
+  @apply mt-4 text-sm text-center italic text-gray-500;
+}
+
+/* tables --------------------------------------------------------------- */
+.prose table {
+  @apply my-8 w-full border-collapse rounded-xl
+                            bg-gray-900/50 border border-gray-700/50;
+}
+.prose th {
+  @apply bg-gray-800/80 text-white font-semibold px-6 py-4 text-left
+                            border-b border-gray-700/50;
+}
+.prose td {
+  @apply px-6 py-4 border-b border-gray-800/50;
+}
+.prose tr:hover {
+  @apply bg-gray-800/30;
+}
+
+/* miscellany ----------------------------------------------------------- */
+.prose mark {
+  @apply bg-yellow-500/20 text-yellow-300 px-1 rounded;
+}
+.prose hr {
+  @apply my-12 w-40 rounded-full mx-auto border-secondary/25;
+}
+
+/* --- MOBILE TWEAKS ---------------------------------------------------- */
+@media (max-width: 48rem) {
+  .prose {
+    @apply text-base;
+  }
+  .prose h1 {
+    @apply text-3xl;
+  }
+  .prose h2 {
+    @apply text-2xl;
+  }
+  .prose h3 {
+    @apply text-xl;
+  }
+  .prose p,
+  .prose li {
+    @apply text-base;
+  }
+  .prose blockquote {
+    @apply pl-6 text-lg;
+  }
+}
+
+/* REMARK STYLING */
+.remark-link-card-plus__container {
+  @apply mb-6;
+}
+
+/* card */
+.remark-link-card-plus__card {
+  @apply flex flex-col-reverse sm:flex-row sm:h-32 overflow-hidden rounded-xl border border-secondary/50 hover:border-verde transition-colors !no-underline;
+}
+
+/* left (or right) text area */
+.remark-link-card-plus__main {
+  @apply flex flex-col flex-1 p-4 space-y-4;
+}
+
+.remark-link-card-plus__title {
+  @apply font-semibold text-lg  text-white line-clamp-2;
+}
+
+.remark-link-card-plus__description {
+  @apply mt-1 text-sm text-slate-300 line-clamp-1 sm:w-2/3;
+}
+
+/* favicon + url line */
+.remark-link-card-plus__meta {
+  @apply flex items-center mt-auto h-min;
+}
+
+.remark-link-card-plus__favicon {
+  @apply !mr-1 h-4 w-4 !m-0;
+}
+
+.remark-link-card-plus__url {
+  @apply text-xs text-slate-400;
+}
+
+/* thumbnail */
+.remark-link-card-plus__thumbnail {
+  @apply sm:w-1/3 sm:h-32 md:max-w-64;
+}
+
+.remark-link-card-plus__image {
+  @apply w-full h-full object-cover !m-0 rounded-b-none! sm:rounded-l-none!;
+}

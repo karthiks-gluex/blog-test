@@ -1,0 +1,99 @@
+---
+import BlogCard from "./BlogCard.astro"
+import type { BlogPost, Category } from "~/types/blog"
+
+interface Props {
+  posts: BlogPost[]
+  categories: Category[]
+}
+
+const { posts, categories } = Astro.props
+---
+
+<div>
+  <div
+    id="blog-grid"
+    class="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+  >
+    {posts.map((post) => <BlogCard post={post} />)}
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const categoryFilter = document.getElementById("category-filter") as HTMLSelectElement
+    const sortToggle = document.getElementById("sort-toggle") as HTMLButtonElement
+    const sortLabel = document.getElementById("sort-label") as HTMLSpanElement
+    const blogGrid = document.getElementById("blog-grid") as HTMLDivElement
+
+    let currentSort: "newest" | "oldest" = "newest"
+    let currentCategory = ""
+    let visiblePosts = 100
+
+    // Get all posts data from the rendered HTML
+    const allPosts = Array.from(blogGrid.children)
+    let filteredPosts = [...allPosts]
+
+    function updateDisplay() {
+      // Hide all posts
+      allPosts.forEach((post) => {
+        ;(post as HTMLElement).style.display = "none"
+      })
+
+      // Show filtered and sorted posts up to visiblePosts limit
+      filteredPosts.slice(0, visiblePosts).forEach((post) => {
+        ;(post as HTMLElement).style.display = "block"
+      })
+    }
+
+    function filterAndSort() {
+      // Filter by category
+      if (currentCategory) {
+        filteredPosts = allPosts.filter((post) => {
+          const categorySpan = post.querySelector('[class*="bg-blue-600"]')
+          return categorySpan?.textContent?.trim().toLowerCase().includes(currentCategory.toLowerCase())
+        })
+      } else {
+        filteredPosts = [...allPosts]
+      }
+
+      // Sort posts
+      filteredPosts.sort((a, b) => {
+        const dateA = new Date((a as HTMLElement).dataset.publishDate || "")
+        const dateB = new Date((b as HTMLElement).dataset.publishDate || "")
+
+        if (currentSort === "newest") {
+          return dateB.getTime() - dateA.getTime()
+        } else {
+          return dateA.getTime() - dateB.getTime()
+        }
+      })
+
+      visiblePosts = 100
+      updateDisplay()
+    }
+
+    // Category filtering
+    categoryFilter?.addEventListener("change", (e) => {
+      currentCategory = (e.target as HTMLSelectElement).value
+      filterAndSort()
+    })
+
+    // Sort toggle
+    sortToggle?.addEventListener("click", () => {
+      currentSort = currentSort === "newest" ? "oldest" : "newest"
+      sortLabel.textContent = currentSort === "newest" ? "Newest" : "Oldest"
+      filterAndSort()
+    })
+
+    // Add publish date data attributes to posts for sorting
+    allPosts.forEach((post, index) => {
+      // This would need to be populated with actual publish dates
+      // For now, we'll use the index as a fallback
+      ;(post as HTMLElement).dataset.publishDate = new Date(Date.now() - index * 86400000).toISOString()
+    })
+
+    // Initial display
+    updateDisplay()
+  })
+</script>

@@ -1,0 +1,17 @@
+---
+import { GoogleAnalytics } from "@astrolib/analytics"
+import { ANALYTICS } from "astrowind:config"
+
+const rawGoogleAnalyticsId = ANALYTICS?.vendors?.googleAnalytics?.id
+const googleAnalyticsId = rawGoogleAnalyticsId ? String(rawGoogleAnalyticsId) : null
+const googleAnalyticsPartytown = ANALYTICS?.vendors?.googleAnalytics?.partytown ?? false
+---
+
+{
+  googleAnalyticsId ? (
+    <GoogleAnalytics
+      id={googleAnalyticsId}
+      partytown={googleAnalyticsPartytown}
+    />
+  ) : null
+}

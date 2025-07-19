@@ -1,0 +1,47 @@
+---
+import "~/assets/styles/tailwind.css"
+
+import { I18N } from "astrowind:config"
+import { ClientRouter } from "astro:transitions"
+
+import Analytics from "~/components/seo/Analytics.astro"
+import BasicScripts from "~/components/scripts/BasicScripts.astro"
+import ColorMode from "~/components/style/ColorMode.astro"
+import CustomStyles from "~/components/style/CustomStyles.astro"
+import Favicons from "~/components/seo/Favicons.astro"
+import Headers from "~/components/seo/Headers.astro"
+import Metadata from "~/components/seo/Metadata.astro"
+import SiteVerification from "~/components/seo/SiteVerification.astro"
+
+import { type MetaData as MetaDataType } from "~/types"
+
+export interface Props {
+  metadata?: MetaDataType
+}
+
+const { metadata = {} } = Astro.props
+const { language, textDirection } = I18N
+---
+
+<!doctype html>
+<html
+  lang={language}
+  dir={textDirection}
+  class="2xl:text-[20px]"
+>
+  <head>
+    <Headers />
+    <Favicons />
+    <CustomStyles />
+    <ColorMode />
+    <Metadata {...metadata} />
+    <SiteVerification />
+    <Analytics />
+    <ClientRouter fallback="swap" />
+  </head>
+
+  <body class="antialiased tracking-tight">
+    <slot />
+    <BasicScripts />
+  </body>
+</html>

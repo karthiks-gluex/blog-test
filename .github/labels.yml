@@ -1,0 +1,187 @@
+- name: 👀 Feature Requested
+  description: Request for a feature
+  color: 07D90A
+
+- name: ignore-for-release
+  description: Ignore pull request for a new release
+  color: 9C28FC
+
+- name: todo
+  description: Action we need to perform at some moment
+  color: 82FC28
+
+- name: 💻 Source
+  description: Indicates the scope is related to the own service logic
+  color: FDC720
+
+- name: 🧪 Tests
+  description: Indicates the scope is related to the tests
+  color: 088E26
+
+- name: ⚙️ Configuration
+  description: Indicates the scope is related to the configuration
+  color: BDBDBD
+
+- name: 🧹 Chore
+  description: Indicates routine updates that do not affect production code
+  color: BDBDBD
+
+- name: 🐳 Build
+  description: Indicates the change is related to the build
+  color: 0FD4DA
+
+- name: 🚀 CI/CD
+  description: Indicates the change is related to CI/CD workflows
+  color: FF4D4D
+
+- name: 🏠 Github Configuration
+  description: Indicates the change is related to github settings
+  color: 555555
+
+- name: 🚀 Feature
+  description: Feature added in the PR
+  color: F10505
+
+- name: 🐞 Bug
+  description: Bug identified
+  color: F4D03F
+
+- name: 🕵🏻 Fix
+  description: Fix applied in the PR
+  color: F4D03F
+
+- name: ⚠️ Breaking Change
+  description: Breaking change in the PR
+  color: F1F800
+
+- name: 🚑 Hotfix
+  description: Hotfix applied in the PR
+  color: FF0000
+
+- name: 📦 Dependencies
+  description: Pull requests that update a dependency file
+  color: 95A5A6
+
+- name: 📝 Documentation
+  description: Improvements or additions to documentation
+  color: 228AFF
+
+- name: 🤦‍ Duplicate
+  description: This issue or pull request already exists
+  color: 17202A
+
+- name: 🤩 size/xs
+  description: Pull request size XS
+  color: 27AE60
+
+- name: 🥳 size/s
+  description: Pull request size S
+  color: 2ECC71
+
+- name: 😎 size/m
+  description: Pull request size M
+  color: F1C40F
+
+- name: 😖 size/l
+  description: Pull request size L
+  color: F39C12
+
+- name: 🤯 size/xl
+  description: Pull request size XL
+  color: E67E22
+
+- name: ✨ Enhancement
+  description: Suggests new functionality or an improvement to existing features
+  color: FFB900
+
+- name: 🔧 Refactor
+  description: Code change that neither fixes a bug nor adds a feature
+  color: 5DADE2
+
+- name: 🛠 Improvement
+  description: Minor upgrades or optimizations to the code
+  color: 27AE60
+
+- name: "priority-critical"
+  description: "This should be dealt with ASAP. Not fixing this issue would be a serious error"
+  color: ee0701
+
+- name: "priority-high"
+  description: "After critical issues are fixed, these should be dealt with before any further issues"
+  color: b60205
+
+- name: "priority-medium"
+  description: "This issue may be useful, and needs some attention"
+  color: 0e8a16
+
+- name: "priority-low"
+  description: "Nice addition to have, but not necessary"
+  color: e4ea8a
+
+- name: "major"
+  color: b60205
+  description: "This PR causes a major version bump in the version number"
+
+- name: "minor"
+  color: 0e8a16
+  description: "This PR causes a minor version bump in the version number"
+
+- name: "beginner-friendly"
+  description: "Good first issue for people wanting to contribute to the project"
+  color: 0e8a16
+
+- name: "help-wanted"
+  description: "We need some extra helping hands or expertise in order to resolve this"
+  color: 0e8a16
+
+- name: stale
+  description: Marked automatically after 30 days of inactivity
+  color: 3E4B9E
+
+- name: security
+  description: Security-related issue or pull request
+  color: EE4C2C
+
+- name: needs-review
+  description: Requires maintainer (security) review
+  color: C2E0C6
+
+- name: question
+  description: General question or discussion
+  color: D876E3
+
+- name: DONT_MERGE
+  description: Blocked - do **not** merge
+  color: 000000
+
+- name: WIP
+  description: Work in progress - not ready for review
+  color: FBCA04
+
+- name: needs triage
+  description: Awaiting maintainer triage
+  color: FEF2C0
+
+- name: in progress
+  description: Someone is actively working on this
+  color: 0052CC
+
+- name: blocked
+  description: Cannot proceed until a dependency is resolved
+  color: D93F0B
+
+- name: ready for review
+  description: Code complete - waiting for maintainer review
+  color: 0E8A16
+
+- name: wontfix
+  description: Decided we won't fix or implement this
+  color: 666666
+
+- name: first-timers-only
+  description: Even simpler than 'beginner-friendly' - ideal first PR
+  color: 7057FF
+
+- name: no-changelog
+  description: Exclude from release notes
+  color: 9C28FC

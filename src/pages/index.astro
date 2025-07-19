@@ -1,0 +1,60 @@
+---
+import { getCollection } from "astro:content"
+
+import Layout from "~/layouts/Layout.astro"
+import BlogHeader from "~/components/blog/BlogHeader.astro"
+import FeaturedPost from "~/components/blog/FeaturedPost.astro"
+import BlogGrid from "~/components/blog/BlogGrid.astro"
+import NewsletterSignup from "~/components/blog/NewsletterSignup.astro"
+import { type BlogPost, type Category } from "~/types"
+
+const metadata = {
+  title: "Blog | GlueX Protocol",
+  ignoreTitleTemplate: true,
+}
+
+// Get all blog posts from content collection
+const allPosts: BlogPost[] = await getCollection("blog", ({ data }) => {
+  return data.draft !== true
+})
+
+// Sort posts by publish date (newest first)
+const sortedPosts = allPosts.sort(
+  (a, b) => new Date(b.data.publishDate).getTime() - new Date(a.data.publishDate).getTime()
+)
+
+// Get featured post (latest post)
+const featuredPost = sortedPosts[0]
+
+// Get remaining posts for grid
+const gridPosts = sortedPosts.slice(1)
+
+// Get unique categories for filter
+const categories: Category[] = [
+  ...new Set(
+    allPosts.flatMap((post) => (post.data.category ? [post.data.category] : [])).map((cat) => JSON.stringify(cat))
+  ),
+].map((cat) => JSON.parse(cat))
+---
+
+<Layout metadata={metadata}>
+  <div class="min-h-screen bg-[#141718]">
+    <BlogHeader />
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      {
+        featuredPost && (
+          <section class="mb-16">
+            <FeaturedPost post={featuredPost} />
+          </section>
+        )
+      }
+      <section>
+        <BlogGrid
+          posts={gridPosts}
+          categories={categories}
+        />
+      </section>
+    </main>
+    <NewsletterSignup />
+  </div>
+</Layout>
