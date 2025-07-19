@@ -29,7 +29,7 @@ const whenExternalScripts = (items: (() => AstroIntegration) | (() => AstroInteg
 export default defineConfig({
   // output: "static",
   site: "https://karthiks-gluex.github.io/blog-test/",
-  base: ".",
+  base: "/blog-test/",
 
   integrations: [
     sitemap(),
